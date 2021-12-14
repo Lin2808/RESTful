@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -46,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void jsonParse()
     {
-        String url = "https://gorest.co.in/public/v1/users";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        String url = "https://api-uat.kushkipagos.com/transfer/v1/bankList";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                url,
+                null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
@@ -73,14 +76,25 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener()
+                },
+                new Response.ErrorListener()
         {
             @Override
             public void onErrorResponse(VolleyError error)
             {
                 error.printStackTrace();
             }
-        });
+        })
+        {
+            @Override
+            public Map getHeaders() throws AuthFailureError
+            {
+                HashMap headers = new HashMap();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "84e1d0de1fbf437e9779fd6a52a9ca18");
+                return headers;
+            }
+        };
         mQueue.add(request);
     }
 }
