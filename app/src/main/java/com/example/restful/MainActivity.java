@@ -62,13 +62,9 @@ public class MainActivity extends AppCompatActivity {
                             for(int i = 0; i < jsonArray.length(); i++)
                             {
                                 JSONObject data = jsonArray.getJSONObject(i);
-                                int id = data.getInt("id");
+                                String codigo = data.getString("code");
                                 String name = data.getString("name");
-                                String email = data.getString("email");
-                                String gender = data.getString("gender");
-                                String status = data.getString("status");
-                                mTextViewResult.append("id: " + String.valueOf(id) + "\nNombre: " + name +
-                                        "\nEmail: " + email + "\nGénero: " + gender + "\nEstado: " + status + "\n\n");
+                                mTextViewResult.append("code: " + codigo + "\nNombre: " + name + "\n\n");
                             }
                         }
                         catch (JSONException e)
