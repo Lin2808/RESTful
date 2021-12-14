@@ -3,6 +3,7 @@ package com.example.restful;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,10 +14,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.restful.WebService.Asynchtask;
+import com.example.restful.WebService.WebService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextViewResult;
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTextViewResult = findViewById(R.id.txtVista);
         Button buttonParse = findViewById(R.id.btnMostrar);
-
+        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
         mQueue = Volley.newRequestQueue(this);
         buttonParse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void jsonParse()
     {
         String url = "https://gorest.co.in/public/v1/users";
